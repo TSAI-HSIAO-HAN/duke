@@ -25,6 +25,7 @@ public class Storage {
      * @param filePath The file's path.
      */
     public Storage(String filePath) {
+        assert filePath != "";
         this.filePath = filePath;
     }
 
