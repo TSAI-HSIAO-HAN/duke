@@ -1,2 +1,3 @@
-D | 0 | write | 02/12/2019 1800
+E | 0 | write | 02/12/2019 1800
 E | 0 | swim in pool | westcoast
+E | 0 | eat | 03/05/2020 1800

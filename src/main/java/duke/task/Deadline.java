@@ -2,7 +2,6 @@ package duke.task;
 
 import duke.exception.DukeException;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,15 +18,10 @@ public class Deadline extends Task {
      * @param time The time of the deadline.
      * @throws DukeException When time is in wrong format.
      */
-    public Deadline(String description, String time) throws DukeException {
+    public Deadline(String description, Date time) throws DukeException {
         super(description);
         this.type = Type.D;
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-            this.time = formatter.parse(time);
-        } catch (ParseException e) {
-            throw new DukeException("Time format wrong");
-        }
+        this.time = time;
 
     }
 

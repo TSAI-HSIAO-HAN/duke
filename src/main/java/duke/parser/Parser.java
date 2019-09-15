@@ -1,13 +1,15 @@
 package duke.parser;
 
 import duke.command.*;
-
 import duke.exception.DukeException;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * The parser of the user command.
@@ -59,8 +61,10 @@ public class Parser {
             if (event.length != 2) {
                 throw new DukeException(" ☹ OOPS!!! The description of a event is wrong.");
             }
-            Task task = new Deadline(event[0], event[1]);
+            Date actualTime = stringToDate(event[1]);
+            Task task = new Deadline(event[0], actualTime);
             return new AddCommand(task);
+
         } else if (fullCommand.startsWith("find")) {
             String keyword = fullCommand.substring(5);
             return new FindCommand(keyword);
@@ -68,4 +72,17 @@ public class Parser {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
+
+    public static Date stringToDate(String dateInString) throws DukeException {
+        Date actualTime;
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            actualTime = formatter.parse(dateInString);
+        } catch (ParseException e) {
+            throw new DukeException("Time format wrong");
+        }
+
+        return actualTime;
+    }
+
 }

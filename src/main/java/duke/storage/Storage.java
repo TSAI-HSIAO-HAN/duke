@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.exception.DukeException;
+import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -11,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -55,14 +57,14 @@ public class Storage {
                 }
                 tasks.add(task1);
                 break;
-            case "D":
-                Task task2 = new Deadline(todoTask[2], todoTask[3]);
-                if (todoTask[1].equals("1")) {
-                    task2.markAsDone();
-                }
-                tasks.add(task2);
-                break;
-            case "E":
+                case "D":
+                    Date time = Parser.stringToDate(todoTask[3]);
+                    Task task2 = new Deadline(todoTask[2], time);
+                    if (todoTask[1].equals("1")) {
+                        task2.markAsDone();
+                    }
+
+                case "E":
                 Task task3 = new Event(todoTask[2], todoTask[3]);
                 if (todoTask[1].equals("1")) {
                     task3.markAsDone();
